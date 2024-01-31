@@ -14,7 +14,7 @@ resource "aws_instance" "example" {
 	EOF
 
   tags = {
-    Name = var.instance_name
+    Name = join("-", [var.prefix, var.instance_name])
   }
   vpc_security_group_ids = [aws_security_group.instance.id]
 }
@@ -25,13 +25,13 @@ resource "tls_private_key" "example" {
 }
 
 resource "aws_key_pair" "example" {
-  key_name   = var.instance_key_name
+  key_name   = join("-", [var.prefix, var.instance_key_name])
   public_key = tls_private_key.example.public_key_openssh
 }
 
 
 resource "aws_security_group" "instance" {
-  name = "terraform-tcp-security-group"
+  name = join("-", [var.prefix, "terraform-tcp-security-group"])
 
   ingress {
     from_port   = 80

@@ -61,3 +61,8 @@ variable "instance_key_name" {
   default     = "aws-test-key"
 }
 
+variable "prefix" {
+  description = "Prefix to add to all the services"
+  type        = string
+  default     = "default"
+}
