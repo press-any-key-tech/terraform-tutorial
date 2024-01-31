@@ -42,7 +42,7 @@ aws iam attach-role-policy --role-name terraform --policy-arn arn:aws:iam::aws:p
 aws iam create-policy --policy-name terraform --policy-document file://aws/iam/terraform-policy.json
 ```
 
-## Usage
+## Terraform Usage
 
 ### Initialize
 
@@ -82,6 +82,12 @@ Then run:
 ```bash
 terraform plan -var-file="configuration.tfvars"
 ```
+
+### Get private key
+
+    ```bash
+    terraform output -show-sensitive private_key > path_to_the_file.pem
+    ```
 
 ## Connect with SSH
 
