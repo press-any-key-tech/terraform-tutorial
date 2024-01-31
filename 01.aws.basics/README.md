@@ -86,7 +86,7 @@ terraform plan -var-file="configuration.tfvars"
 ### Get private key
 
     ```bash
-    terraform output -show-sensitive private_key > path_to_the_file.pem
+    terraform output -raw private_key > path_to_the_file.pem
     ```
 
 ## Connect with SSH
