@@ -1,6 +1,6 @@
-# 06.backend.configuration
+# 07.modules
 
-Testing terrafom with aws using backend configuration
+Testing terrafom with aws using workspaces
 
 ## Prerequisites
 
@@ -65,6 +65,33 @@ key    = "linus/terraform.tfstate"
 
 ```bash
 terraform init --backend-config=application.backend.conf -reconfigure
+```
+
+### Create workspaces
+
+```bash
+terraform workspace new dev
+terraform workspace new prod
+```
+
+### Select a workspace
+
+Before operating with terraform, select a workspace:
+
+```bash
+terraform workspace select dev
+```
+
+### Deselect a workspace
+
+```bash
+terraform workspace select default
+```
+
+### Delete a workspace (optional)
+
+```bash
+terraform workspace delete dev
 ```
 
 ### Variables file
