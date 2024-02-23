@@ -150,7 +150,7 @@ module "tcp_dummy_service_http" {
       health_check_path        = "/docs"
       health_check_status_code = "200"
       health_check_protocol    = "HTTP"
-      path                     = "/*"
+      path                     = "/http/*"
       # subdomain = "api.example.com"
 
     }
