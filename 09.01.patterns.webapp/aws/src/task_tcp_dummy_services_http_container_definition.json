@@ -1,0 +1,37 @@
+[
+  {
+    "name": "${container_name}",
+    "image": "${image}",
+    "portMappings": [
+      {
+        "containerPort": 8000,
+        "protocol": "tcp",
+        "name": "web-8000-tcp",
+        "hostPort": 8000
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-region": "${logs-region}",
+        "awslogs-stream-prefix": "${stream_prefix}-log-stream",
+        "awslogs-group": "${logs-group}"
+      }
+    },
+    "essential": true,
+    "command": [
+      "uvicorn",
+      "tcp_dummy_services.http.main:app",
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "8000"
+    ],
+    "environment": [
+      {
+        "name": "LOG_LEVEL",
+        "value": "debug"
+      }
+    ]
+  }
+]

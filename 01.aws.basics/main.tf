@@ -6,12 +6,12 @@ resource "aws_instance" "example" {
   key_name      = aws_key_pair.example.key_name
 
   user_data = <<-EOF
-	#!/bin/bash
-	sudo yum update -y
-	sudo yum -y install httpd -y
-	sudo service httpd start
-	sudo bash -c 'echo "Hello world from EC2 $(hostname -f)" > /var/www/html/index.html'
-	EOF
+#!/bin/bash
+sudo yum update -y
+sudo yum -y install httpd -y
+sudo service httpd start
+sudo bash -c 'echo "Hello world from EC2 $(hostname -f)" > /var/www/html/index.html'
+EOF
 
   tags = {
     Name = join("-", [var.prefix, var.instance_name])
