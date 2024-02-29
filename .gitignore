@@ -42,3 +42,5 @@ terraform.tfstate.backup
 **/generated/
 *.backend.conf
 *.pem
+
+terraform.json
