@@ -42,3 +42,7 @@ terraform.tfstate.backup
 **/generated/
 *.backend.conf
 *.pem
+
+# Ignore .credentials directory
+.credentials/
+

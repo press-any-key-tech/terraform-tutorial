@@ -77,6 +77,34 @@ resource "aws_ecs_task_definition" "taskdef" {
   )
 }
 
+################################################################################
+# Service discovery configuration
+################################################################################
+
+# TODO: make configurable
+resource "aws_service_discovery_service" "service" {
+  count = length(var.tasks)
+
+  # TODO: do not use the same name for the task and the namespace
+  name = var.tasks[count.index].name
+
+  dns_config {
+    namespace_id = var.namespace_id
+
+    dns_records {
+      ttl  = 10
+      type = "A"
+    }
+
+    routing_policy = "MULTIVALUE"
+  }
+
+  health_check_custom_config {
+    failure_threshold = 1
+  }
+}
+
+
 
 ################################################################################
 # Load Balancer configuration
@@ -231,6 +259,12 @@ resource "aws_ecs_service" "ecs-service" {
   task_definition                    = aws_ecs_task_definition.taskdef[count.index].arn
   deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 50
+
+  service_registries {
+    registry_arn   = aws_service_discovery_service.service[count.index].arn
+    container_name = var.tasks[count.index].container_name
+  }
+
 
   network_configuration {
     # assign_public_ip not allowed for launch type EC2
