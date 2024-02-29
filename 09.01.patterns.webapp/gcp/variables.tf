@@ -1,8 +1,8 @@
 # The home of the variables
-variable "tags" {
-  description = "External tags map"
-  type        = map(string)
-  default     = {}
+variable "project_id" {
+  description = "Google project ID"
+  type        = string
+  default     = ""
 }
 
 variable "region" {
@@ -10,6 +10,59 @@ variable "region" {
   type        = string
   default     = "eu-west-2"
 }
+
+variable "credentials" {
+  description = "Path to the service account key file"
+  type        = string
+  default     = null
+}
+
+
+variable "image_name" {
+  description = "Cloud Run Service image name"
+  type        = string
+  default     = ""
+}
+
+variable "image_tag" {
+  description = "Cloud Run Service image tag"
+  type        = string
+  default     = ""
+}
+
+variable "traffic_percent" {
+  description = "Cloud Run Service traffic percent"
+  type        = number
+  default     = 100
+}
+
+variable "common_tags" {
+  description = "Common tags to be applied to all resources"
+  type        = map(string)
+  default = {
+    Environment  = "dev"
+    Deployment   = "terraform"
+    CostCenter   = "devops"
+    Customer     = "personal"
+    Project      = "terraform-test"
+    Organization = "personal"
+  }
+}
+
+
+
+
+
+
+
+
+
+variable "tags" {
+  description = "External tags map"
+  type        = map(string)
+  default     = {}
+}
+
 
 variable "environment" {
   description = "Set environment name"
@@ -150,13 +203,6 @@ variable "frontend_origin_id" {
   type        = string
   default     = null
 }
-
-variable "namespace_name" {
-  description = "Namespace name for service discovery"
-  type        = string
-  default     = null
-}
-
 
 variable "cluster_name" {
   description = "ECS cluster name"

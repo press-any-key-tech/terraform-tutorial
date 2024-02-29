@@ -52,12 +52,17 @@ variable "service_name" {
   default     = null
 }
 
+variable "ns_service_name" {
+  description = "Service name for the service discovery"
+  type        = string
+  default     = null
+}
 
-
-
-
-
-
+variable "namespace_id" {
+  description = "Namespace id for service discovery"
+  type        = string
+  default     = null
+}
 
 
 

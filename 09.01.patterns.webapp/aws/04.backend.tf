@@ -85,6 +85,16 @@ module "alb" {
 # Backend deploy
 # ################################################################
 
+# Namespace for the services
+module "service_discovery" {
+  source      = "./modules/service-discovery"
+  environment = var.environment
+  name        = var.namespace_name
+  vpc_id      = module.vpc.vpc_id
+  tags        = var.tags
+}
+
+
 # Bucket for files
 module "s3_backend" {
   source                 = "./modules/s3"
@@ -114,6 +124,7 @@ module "tcp_dummy_service_http" {
   environment  = var.environment
   project      = var.project
   service_name = "http-dummy-services"
+  namespace_id = module.service_discovery.namespace_id
 
   cluster_name = module.ecs-cluster.ecs_cluster_name
   # certificate_arn    = module.acm-certificate.arn
